@@ -1,0 +1,50 @@
+task list:
+-fix issue with isSquareAttacked (pawn doesnt register as attacking) 
+        **** fixed
+-handle checkmate logic 
+        ** done, can identify checkmate
+-handle stalemate logic
+-handle castling logic: can castle at all, can king castle, queen castle. Is king in check or are any of the square in between under attack? 
+        ** done - also works with applyMove and undoMove
+-handle promotion properly
+
+-isSquareAttacked and inCheck are basically duplicate functions 
+        *** fixed - inCheck calls isSquareAttacked
+- add toast fires instead of using text context 
+        ** pretty much done
+- remove gameStatus 
+        ** done
+- add move evaluation numbers to generated moves for a selected piece - 
+        *** somewhat working, needs to fix errors not on my end
+- add static main page, that allows player to enter information mainly difficulty level, play against computer etc..
+- handle enPassant 
+        ** done 
+- refractor applyMove and remove duplicate :  
+        this._selected = null;
+        this._squareAt(move.to).classList.remove('selected');
+        //statusEl.textContent = `moved to ${coordName(move.to.f,move.to.r)}`;
+        toast.push(this.state.sideToMove + ` moved to ${coordName(move.to.f,move.to.r)}`);
+        this.renderPosition();
+        this.toggleTurn();
+
+--refractor...
+- //add a then statement to reset game when the checkmate swal fire closes
+ ** taken care
+- fix promotion screen that all options fit to square on screen
+ ** pretty much done.
+- add a option to toggle viewing 
+ *** done
+ 
+- add the option to play against computer
+
+- fix calculation of enpassant value in fen string
+*** fixed
+
+-isPawnMove can be refractored a bit
+
+-ensure capture list for black and white are accurate, functioning properly, and accurately update
+
+     
+- //need to account for enpassant undo as the pawn probably won't be restored
+
+

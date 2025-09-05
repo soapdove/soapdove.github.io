@@ -1,0 +1,295 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Marlowe S. Johnson II — Resume Showcase</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;800;900&display=swap" rel="stylesheet">
+  <style>
+    :root{
+      --bg:url('https://images.unsplash.com/photo-1519681393784-d120267933ba?q=80&w=1880&auto=format&fit=crop'); /* swap to your own */
+      --ink:#eef2ff;
+      --ink-dim:#c7d2fe;
+      --glass:rgba(255,255,255,0.08);
+      --glass-strong:rgba(255,255,255,0.12);
+      --border:rgba(255,255,255,0.24);
+      --accent:#8b5cf6; /* violet-500 */
+      --accent-2:#22d3ee; /* cyan-400 */
+      --shadow:0 20px 40px -20px rgba(0,0,0,.6);
+    }
+    *{box-sizing:border-box}
+    html,body{height:100%}
+    body{
+      margin:0; font-family:Inter, system-ui, -apple-system, Segoe UI, Roboto, Helvetica, Arial;
+      color:var(--ink); background:#0b1020; overflow-x:hidden;
+    }
+    .stage{position:relative; min-height:100svh;}
+    .backdrop{position:fixed; inset:0; background-image:var(--bg); background-size:cover; background-position:center; filter:saturate(1.1) contrast(1.05) brightness(.92); z-index:-2;}
+    .vignette{position:fixed; inset:0; background:radial-gradient(120% 90% at 50% 10%,rgba(0,0,0,.25),rgba(5,10,25,.8) 60%,rgba(5,10,25,.95)); z-index:-1}
+
+    header{
+      position:sticky; top:0; z-index:10; backdrop-filter:blur(10px);
+      background:linear-gradient(180deg, rgba(10,12,24,.65), rgba(10,12,24,.35));
+      border-bottom:1px solid var(--border); box-shadow:var(--shadow);
+    }
+    .nav{max-width:1100px; margin:0 auto; display:flex; align-items:center; gap:16px; padding:10px 16px}
+    .back{
+      display:inline-flex; align-items:center; gap:8px; padding:10px 14px; border-radius:14px;
+      background:var(--glass); border:1px solid var(--border); color:var(--ink); text-decoration:none; font-weight:600;
+      transition:transform .15s ease, background-color .15s ease;
+    }
+    .back:hover{transform:translateY(-2px); background:var(--glass-strong)}
+
+    .hero{max-width:1100px; margin:32px auto 18px; padding:0 16px; display:grid; grid-template-columns:minmax(220px, 1fr) 2.2fr; gap:22px}
+    .card{
+      background:linear-gradient(180deg, rgba(255,255,255,.08), rgba(255,255,255,.05));
+      border:1px solid var(--border); border-radius:22px; padding:18px; box-shadow:var(--shadow); backdrop-filter: blur(8px);
+    }
+    .id{
+      display:flex; align-items:center; gap:16px; margin-bottom:12px
+    }
+    .avatar{
+      width:72px; height:72px; border-radius:50%; display:grid; place-items:center; font-weight:900; font-size:24px;
+      background:conic-gradient(from 120deg, var(--accent), var(--accent-2)); color:#0a0f1e; box-shadow:0 10px 20px -10px rgba(34,211,238,.6);
+      animation:spin-slow 12s linear infinite;
+    }
+    .avatar span{filter:drop-shadow(0 1px 0 rgba(0,0,0,.3))}
+    @keyframes spin-slow{0%{transform:rotate(0)}100%{transform:rotate(360deg)}}
+
+    h1{font-size:clamp(26px, 3.6vw, 40px); margin:0; letter-spacing:.2px}
+    .subtitle{opacity:.9}
+    .contact{display:flex; flex-wrap:wrap; gap:10px; margin-top:12px}
+    .pill{display:inline-flex; align-items:center; gap:8px; padding:8px 12px; border-radius:999px; background:var(--glass); border:1px solid var(--border); font-weight:600}
+    .pill a{color:inherit; text-decoration:none}
+
+    .cta{display:flex; gap:10px; margin-top:14px}
+    .btn{position:relative; isolation:isolate; padding:10px 14px; font-weight:800; letter-spacing:.2px; border-radius:14px; border:1px solid var(--border); background:var(--glass); color:var(--ink); text-decoration:none; box-shadow:var(--shadow); transition:transform .15s ease, background-color .15s ease}
+    .btn:hover{transform:translateY(-2px); background:var(--glass-strong)}
+    .btn.sway{animation:sway 2.6s ease-in-out infinite}
+    @keyframes sway{0%{transform:translateY(0)}25%{transform:translateY(-3px)}50%{transform:translateY(0)}75%{transform:translateY(3px)}100%{transform:translateY(0)}}
+
+    .summary p{margin:.5em 0; line-height:1.65}
+
+    .section{max-width:1100px; margin:22px auto; padding:0 16px}
+    .section h2{font-size:20px; letter-spacing:.3px; margin:0 0 12px 6px; opacity:.9}
+
+    .grid{display:grid; gap:14px}
+    .grid.two{grid-template-columns:1fr 1fr}
+    .grid.three{grid-template-columns:repeat(3, 1fr)}
+    @media (max-width:960px){.hero{grid-template-columns:1fr}.grid.two,.grid.three{grid-template-columns:1fr}}
+
+    .tags{display:flex; flex-wrap:wrap; gap:10px}
+    .tag{padding:6px 10px; border-radius:12px; border:1px solid var(--border); background:var(--glass); font-weight:600; font-size:14px}
+
+    .experience .role{display:flex; align-items:center; justify-content:space-between; gap:12px}
+    .company{opacity:.9; font-weight:700}
+    .time{opacity:.7; font-weight:700}
+    ul{margin:10px 0 0 18px}
+
+    .project{
+      display:flex; flex-direction:column; gap:10px; padding:16px; border-radius:18px; border:1px solid var(--border);
+      background:linear-gradient(180deg, rgba(255,255,255,.08), rgba(255,255,255,.04));
+      transition:transform .15s ease, background-color .15s ease, border-color .15s ease; text-decoration:none; color:var(--ink);
+    }
+    .project:hover{transform:translateY(-3px); border-color:rgba(255,255,255,.5)}
+    .badge{font-size:12px; font-weight:800; letter-spacing:.4px; padding:4px 8px; border-radius:999px; background:linear-gradient(90deg, var(--accent), var(--accent-2)); color:#081026; align-self:flex-start}
+
+    footer{max-width:1100px; margin:26px auto 60px; padding:0 16px; text-align:center; opacity:.75}
+
+    /* reveal on scroll */
+    .reveal{opacity:0; transform:translateY(8px); transition:opacity .5s ease, transform .5s ease}
+    .reveal.show{opacity:1; transform:translateY(0)}
+  </style>
+</head>
+<body>
+  <div class="stage">
+    <div class="backdrop" aria-hidden="true"></div>
+    <div class="vignette" aria-hidden="true"></div>
+
+    <header>
+      <div class="nav">
+        <a class="back" href="maker.html" title="Back to main menu">⬅ Back to Menu</a>
+        <div style="font-weight:800; letter-spacing:.4px; opacity:.9">Resume Showcase</div>
+      </div>
+    </header>
+
+    <!-- HERO -->
+    <section class="hero">
+      <div class="card reveal" style="--delay:.0s">
+        <div class="id">
+          <!--<div class="avatar"><span>MJ</span></div>-->
+          <div>
+            <h1>Marlowe S. Johnson II</h1>
+            <div class="subtitle">Cibolo, TX · Computer Science</div>
+          </div>
+        </div>
+        <div class="contact">
+          <div class="pill">📱 <a href="tel:+18086730455">(808) 673-0455</a></div>
+          <div class="pill">✉️ <a href="mailto:johnsonmarlowe5@gmail.com">johnsonmarlowe5@gmail.com</a></div>
+          <div class="pill">🔒 Secret Clearance</div>
+        </div>
+        <div class="cta">
+          <!-- Place the PDF next to this file or change href to your path -->
+          <a class="btn sway" href="Marlowe Johnson Resume 8_14_2025.pdf" download>⬇ Download PDF</a>
+          <a class="btn" href="#projects">View Projects ↓</a>
+        </div>
+      </div>
+
+      <div class="card summary reveal" style="--delay:.05s">
+        <h2 style="margin:0 0 6px 0">Summary</h2>
+        <p>Detail‑oriented CS graduate with strong foundations in statistics, machine learning, and data analysis, with a passion for graphics programming. Skilled in C++, Python, SQL, and data visualization to support data‑driven decision‑making. Proven ability to manage databases, automate reporting, and collaborate across teams to solve complex problems.</p>
+      </div>
+    </section>
+
+    <!-- SKILLS -->
+    <section class="section reveal" style="--delay:.1s">
+      <h2>Technical Skills</h2>
+      <div class="grid two">
+        <div class="card">
+          <div class="tags">
+            <span class="tag">C</span>
+            <span class="tag">C++</span>
+            <span class="tag">C#</span>
+            <span class="tag">Java</span>
+            <span class="tag">Python</span>
+            <span class="tag">JavaScript</span>
+            <span class="tag">PowerShell</span>
+            <span class="tag">OpenGL</span>
+            <span class="tag">OpenCV</span>
+            <span class="tag">React</span>
+            <span class="tag">HTML</span>
+            <span class="tag">Bootstrap</span>
+            <span class="tag">SASS</span>
+            <span class="tag">Unix/Linux</span>
+            <span class="tag">Windows</span>
+          </div>
+        </div>
+        <div class="card">
+          <div class="tags">
+            <span class="tag">Visual Studio</span>
+            <span class="tag">Eclipse</span>
+            <span class="tag">Visio</span>
+            <span class="tag">Git/SVN</span>
+            <span class="tag">Boost</span>
+            <span class="tag">WPF</span>
+            <span class="tag">Azure</span>
+            <span class="tag">T‑SQL</span>
+            <span class="tag">Tableau</span>
+            <span class="tag">Power BI</span>
+            <span class="tag">Excel</span>
+            <span class="tag">ML</span>
+            <span class="tag">Data Analysis</span>
+            <span class="tag">Reporting</span>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- EXPERIENCE -->
+    <section class="section experience reveal" style="--delay:.15s">
+      <h2>Experience</h2>
+      <div class="card">
+        <div class="role">
+          <div>
+            <div style="font-weight:800; font-size:18px">Computer Scientist Intern</div>
+            <div class="company">Air Force Personnel Center (AFPC, DP2ZK)</div>
+          </div>
+          <div class="time">07/2021 – 08/2023</div>
+        </div>
+        <ul>
+          <li>Managed secure personnel database ensuring integrity and compliance with Air Force privacy policies.</li>
+          <li>Wrote complex SQL for retrieval and analytics used by decision‑makers.</li>
+          <li>Optimized schemas and improved functionality for analytics access.</li>
+          <li>Built automated reporting to streamline operations and reduce processing time.</li>
+          <li>Collaborated with Air Force and IT teams to ship custom functionality.</li>
+        </ul>
+      </div>
+    </section>
+
+    <!-- PROJECTS -->
+    <section id="projects" class="section reveal" style="--delay:.2s">
+      <h2>School Projects</h2>
+      <div class="grid two">
+        <a class="project" href="https://github.com/sahiljain11/autonomous_driving" target="_blank" rel="noopener">
+          <span class="badge">TEAM</span>
+          <div style="font-weight:800">Autonomous Driving</div>
+          <div style="opacity:.85">Self‑driving project with perception/control modules.</div>
+        </a>
+        <a class="project" href="https://github.com/RemusW/ray" target="_blank" rel="noopener">
+          <span class="badge">TEAM</span>
+          <div style="font-weight:800">Ray Tracer</div>
+          <div style="opacity:.85">Physically‑based renderer with lighting and materials.</div>
+        </a>
+        <a class="project" href="https://github.com/saumyaa2000/CS354-Final-Project" target="_blank" rel="noopener">
+          <span class="badge">TEAM</span>
+          <div style="font-weight:800">Cut Polygon</div>
+          <div style="opacity:.85">Interactive computational geometry demo.</div>
+        </a>
+        <a class="project" href="https://gitlab.com/yingcctx/cs373-idb" target="_blank" rel="noopener">
+          <span class="badge">TEAM</span>
+          <div style="font-weight:800">City Scoop (IDB)</div>
+          <div style="opacity:.85">Information database project with web UI.</div>
+        </a>
+        <a class="project" href="https://gitlab.com/luca.santos/CS354r_final" target="_blank" rel="noopener">
+          <span class="badge">TEAM</span>
+          <div style="font-weight:800">Doom Jr</div>
+          <div style="opacity:.85">Classic FPS‑style graphics project.</div>
+        </a>
+        <a class="project" href="https://gitlab.com/luke_li/cs354r-4" target="_blank" rel="noopener">
+          <span class="badge">TEAM</span>
+          <div style="font-weight:800">Graphics Project</div>
+          <div style="opacity:.85">Advanced rasterization/shader pipeline exploration.</div>
+        </a>
+        <a class="project" href="https://gitlab.com/msj879/cs371p-life" target="_blank" rel="noopener">
+          <span class="badge">SOLO</span>
+          <div style="font-weight:800">Game of Life</div>
+          <div style="opacity:.85">High‑performance cellular automata implementation.</div>
+        </a>
+        <a class="project" href="https://github.com/msj879/cs342" target="_blank" rel="noopener">
+          <span class="badge">SOLO</span>
+          <div style="font-weight:800">AI Kart Driving</div>
+          <div style="opacity:.85">Reinforcement learning for racing controller.</div>
+        </a>
+      </div>
+    </section>
+
+    <!-- EDUCATION -->
+    <section class="section reveal" style="--delay:.25s">
+      <h2>Education</h2>
+      <div class="grid two">
+        <div class="card">
+          <div style="font-weight:800">B.S. in Computer Science</div>
+          <div class="company">University of Texas at Austin</div>
+          <div class="time">1/2019 - 05/2023</div>
+          <ul>
+            <li>Coursework: Graphics, DB Management, Robotics, Software Engineering, AI</li>
+          </ul>
+        </div>
+        <div class="card">
+          <div style="font-weight:800">Post‑Graduate Biblical & Ministry Training</div>
+          <div class="company">Full‑Time Training in Anaheim (FTTA)</div>
+          <div class="time">8/2023 - 07/2025</div>
+          <ul>
+            <li>Coursework: Leadership, Communication, Conflict Resolution, Public Speaking</li>
+          </ul>
+        </div>
+      </div>
+    </section>
+
+    <footer>References available upon request • © <span id="year"></span> Marlowe S. Johnson II</footer>
+  </div>
+
+  <script>
+    // Update year
+    document.getElementById('year').textContent = new Date().getFullYear();
+
+    // Reveal on scroll
+    const io = new IntersectionObserver((entries)=>{
+      entries.forEach(e=>{ if(e.isIntersecting){ e.target.classList.add('show'); io.unobserve(e.target); } });
+    }, {threshold:.08});
+    document.querySelectorAll('.reveal').forEach(el=>io.observe(el));
+  </script>
+</body>
+</html>

@@ -1,0 +1,82 @@
+:root {
+  --light: #e5a35c;
+  --dark: #6e4d27;
+  --highlight: #f6f669;
+  --generated: #3ee710;
+  --danger: #ec0202;
+}
+body {
+  margin: 0; min-height: 100vh; display: grid; place-items: center;
+  font-family: system-ui, -apple-system, Segoe UI, Roboto, Arial, sans-serif;
+  background: #111; color: #fff;
+}
+.board {
+  display: grid;
+  grid-template-columns: repeat(8, 64px);
+  grid-template-rows: repeat(8, 64px);
+  border: 6px solid #333;
+  box-shadow: 0 10px 30px rgba(0,0,0,.5);
+  user-select: none;
+}
+.square {
+  display: grid; place-items: center;
+  font-size: 40px; cursor: pointer;
+  position: relative;
+}
+.square.light { background: var(--light); color: #111; }
+.square.dark  { background: var(--dark);  color: #111; }
+.square.selected { outline: 4px solid var(--highlight); outline-offset: -4px; }
+.square.generated{ outline: 4px solid var(--generated); outline-offset: -4px;  }
+.square.danger{ outline: 4px solid var(--danger); outline-offset: -4px;  }
+.square-note {
+  position: absolute;
+  top: 50%; left: 50%;
+  transform: translate(-50%, -50%);
+  font-size: 14px;
+  color: red;
+  pointer-events: none; /* so it doesn’t block clicks */
+}
+.coords {
+  position: absolute; font-size: 12px; opacity: .55; pointer-events: none; transform: translate(6px, 42px);
+}
+.square.dark .coords, .square.light .coords { color: #000; }
+.panel {
+  margin-top: 12px; text-align: center; font-size: 14px; opacity: .8;
+}
+.wrap { display: grid; gap: 10px; width: min(100vw - 24px, 980px);}
+
+.layout {
+display: grid;
+grid-template-columns: 180px auto 180px;
+gap: 10px;
+align-items: start;
+
+padding: 12px;
+}
+.tray {
+min-height: 100%;
+background: #1a1a1a;
+border: 1px solid #2a2a2a;
+border-radius: 10px;
+padding: 10px;
+display: grid;
+align-content: start;
+gap: 8px;
+}
+.tray h3 { margin: 0 0 6px 0; font-size: 14px; font-weight: 600; opacity: .9; }
+.captures-list {
+display: grid;
+grid-template-columns: 1fr;
+gap: 6px;
+}
+.capture-item {
+display: flex; align-items: center; justify-content: space-between;
+padding: 6px 8px; border: 1px solid #2d2d2d; border-radius: 8px; background: #141414;
+font-size: 16px;
+}
+.capture-item .piece { font-size: 18px; }
+.capture-item .meta { font-size: 12px; opacity: .8; }
+
+ .controls { margin-top: 8px; text-align: center; }
+    .controls button { padding: 6px 10px; border-radius: 8px; border: 1px solid #444; background:#222; color:#fff; cursor: pointer; }
+    .controls button:hover { background:#2a2a2a; }

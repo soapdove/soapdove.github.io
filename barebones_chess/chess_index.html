@@ -1,0 +1,138 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width,initial-scale=1" />
+<title>Barebones Chess</title>
+<style>
+  html, body { height: 100%; margin: 0; }
+  body {
+    background: #fff url("images/barebones_chess_front.png") no-repeat center center;
+    background-size: contain;
+    font-family: system-ui, -apple-system, Segoe UI, Roboto, Helvetica, Arial, sans-serif;
+  }
+
+  /* overlay that sits “between the pieces” (center of screen) */
+  .overlay {
+    position: fixed; inset: 0;
+    display: grid; place-items: center;
+    padding: 24px;
+  }
+
+  .stack { display: flex; gap: 14px; flex-wrap: wrap; justify-content: center; }
+  .hidden { display: none; }
+
+  .btn {
+    position: relative;
+    top: 225px;
+    left: 100px;
+    padding: 12px 18px;
+    font-size: clamp(16px, 2.5vw, 22px);
+    border-radius: 12px;
+    border: 1px solid #0002;
+    background: rgba(255,255,255,0.92);
+    box-shadow: 0 6px 22px rgba(0,0,0,.12);
+    cursor: pointer;
+    transition: transform .08s ease, box-shadow .18s ease;
+    backdrop-filter: blur(2px);
+  }
+  .btn:hover { transform: translateY(-1px); box-shadow: 0 10px 30px rgba(0,0,0,.16); }
+
+  /* optional tiny “back” link when choosing difficulty */
+  .back {
+    display: inline-block; margin-top: 6px; font-size: 14px; opacity: .8; cursor: pointer;
+    background: none; border: none; text-decoration: underline;
+  }
+
+</style>
+</head>
+<body>
+  
+
+  <div class="overlay">
+    <!-- First view -->
+    <div id="menu" class="stack">
+      <button class="btn" id="vsComputer">VS Computer</button>
+      <button class="btn" id="vsPlayer">VS Player</button>
+    </div>
+
+    <!-- Difficulty view -->
+    <div id="difficulty" class="stack hidden" aria-hidden="true">
+      <button class="btn" id=easyMode data-diff="easy">easy</button>
+      <button class="btn" id=mediumMode data-diff="medium">medium</button>
+      <button class="btn" id=hardMode data-diff="hard">hard</button>
+      <button class="back" id="goBack" title="Back">back</button>
+    </div>
+
+    <!--Choosing Side-->
+    <div id="startingSide" class="stack hidden" aria-hidden="true"> 
+        <button class="btn" id="whiteSide" data-diff="white">White</button>
+        <button class="btn" id="blackSide" data-diff="black">Black</button>
+        <button class="btn" id="random" data-diff="random">Random</button>
+        <button class="back" id="goBack2" title="Back">back</button>
+    </div>
+
+  </div>
+
+<script>
+  const GAME_URL = "barebones_chess_board.html";
+
+  const menuEl = document.getElementById("menu");
+  const diffEl = document.getElementById("difficulty");
+  const startingSideEl = document.getElementById("startingSide");
+  const vsComputerBtn = document.getElementById("vsComputer");
+  const vsPlayerBtn   = document.getElementById("vsPlayer");
+  const backBtn       = document.getElementById("goBack");
+  const backBtn2       = document.getElementById("goBack2");
+
+
+  // VS Computer -> show difficulty choices
+  vsComputerBtn.addEventListener("click", () => {
+    sessionStorage.setItem("mode", "computer");
+    menuEl.classList.add("hidden");
+    diffEl.classList.remove("hidden");
+    diffEl.setAttribute("aria-hidden", "false");
+  });
+
+  // VS Player -> go straight to game
+  vsPlayerBtn.addEventListener("click", () => {
+    sessionStorage.setItem("mode", "player");
+    sessionStorage.removeItem("difficulty");
+    window.location.href = GAME_URL;
+  });
+
+  // Handle difficulty buttons
+  diffEl.querySelectorAll("[data-diff]").forEach(btn => {
+    btn.addEventListener("click", () => {
+      const difficulty = btn.getAttribute("data-diff");
+      sessionStorage.setItem("difficulty", difficulty);
+      //window.location.href = GAME_URL;
+      diffEl.classList.add("hidden");
+      startingSideEl.classList.remove("hidden");
+      startingSideEl.setAttribute("aria-hidden","false");
+    });
+  });
+  
+startingSideEl.querySelectorAll("[data-diff]").forEach(btn=>{
+    btn.addEventListener("click", () => {
+    const b_or = btn.getAttribute("data-diff");
+    sessionStorage.setItem("b_or",b_or);
+    window.location.href = GAME_URL;
+    })
+});
+
+  // Optional back link to return to first two buttons
+backBtn.addEventListener("click", () => {
+    diffEl.classList.add("hidden");
+    menuEl.classList.remove("hidden");
+    diffEl.setAttribute("aria-hidden", "true");
+  });
+
+backBtn2.addEventListener("click", () => {
+    startingSideEl.classList.add("hidden");
+    diffEl.classList.remove("hidden");
+    startingSideEl.setAttribute("aria-hidden", "true");
+  });
+</script>
+</body>
+</html>

@@ -1,0 +1,54 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width,initial-scale=1" />
+<title>Barebones Chess Board</title>
+<link rel="stylesheet" href="styles.css">
+</head>
+<body>
+  <div class="layout">
+        <aside class="tray" id="tray-left" aria-label="Left captures"></aside>
+        <main>
+        <div id="board" class="board" aria-label="Chess board"></div>
+        <div class="panel" id="status">Click a piece, then a destination (no rules enforced).</div>
+        <div class="controls">
+          <button id="exit"> Exit </button>
+          <button id="toggle">Flip Side </button>
+        </div>
+        </main>
+        <aside class="tray" id="tray-right" aria-label="Right captures"></aside>
+  </div>
+
+<!-- <script src="script.js"></script> -->
+
+<script src="barebones_chess_board.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+<script src="https://cdn.jsdelivr.net/npm/@zerodevx/svelte-toast@0"> </script>
+<script>
+
+  document.getElementById("exit").addEventListener("click",() =>{
+    window.location.href = "chess_index.html";
+  });
+</script>
+
+<script>
+    const toastApp = new SvelteToast({
+      // Set where the toast container should be appended into
+      target: document.body,
+      props: {
+        options: {
+          // Optionally set default options here
+        }
+      }
+    })
+  </script>
+  <script>
+     let or = sessionStorage.getItem("b_or") ? sessionStorage.getItem("b_or") : 'white';
+     
+     const Chess_Game = new Chess(document.getElementById('board'), document.getElementById('status'), document.getElementById('tray-left'),
+     document.getElementById('tray-right'), or);
+     
+  </script>
+</body>
+</html>
