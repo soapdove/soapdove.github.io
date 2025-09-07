@@ -29,6 +29,7 @@
     
     this.gameInfo = {mode:sessionStorage.getItem('mode') === 'computer' ? 'computer':'player' , side:sessionStorage.getItem('b_or') === 'white'? 'b': 'w'};
     this.whitePromoted = false;
+    this.comMove = false;
 
     this.state = {
       board: [],              
@@ -767,7 +768,7 @@
       this._selected = null;
       this._squareAt(move.to).classList.remove('selected');
       //statusEl.textContent = `moved to ${coordName(move.to.f,move.to.r)}`;
-      toast.push(this.state.sideToMove + ` Moved to ${coordName(move.to.f,move.to.r)}`);
+      //toast.push(this.state.sideToMove + ` Moved to ${coordName(move.to.f,move.to.r)}`);
       this.renderPosition();
       this.toggleTurn();
       this.renderStatus();
@@ -860,7 +861,7 @@
       this.renderPosition();
       this.renderCaptures();
       //statusEl.textContent = `Move undone...`;
-      toast.push("Move undone...");
+      //toast.push("Move undone...");
     }
 
     handleKeyPress(event){
@@ -1051,7 +1052,7 @@
         // let com_moves = this.generateAllLegalMoves(this.gameInfo.side);
         // let ind = Math.random()*com_moves.length-1;
         // this.applyMove(com_moves[ind|0]);\
-                 let move_to_make = this.findMove(3,this.gameInfo.side);
+                 let move_to_make = this.findMove(1,this.gameInfo.side);
               console.log(move_to_make);
 
             this.applyMove(move_to_make.move);
