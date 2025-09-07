@@ -988,7 +988,7 @@
 
       //show pieces in danger
       if (event.key === 'd'){
-        sideToCheck = this.state.sideToMove === 'w' ? 'b':'w';
+        let sideToCheck = this.state.sideToMove === 'w' ? 'b':'w';
         for (let i = 0; i<8; i++)
           for (let j = 0; j<8; j++){
             console.log("danger...?");
@@ -1345,7 +1345,29 @@
       //   [2,2,2,2,2,2,2,2],
       //   [10,8,6,14,18,6,8,10],
       // ]
+
+      /** @typedef {{piece:string, color:string, rank:number, file:number, captured:boolean, idP:number}} BoardPiece */
+
+      const start_board = [
+        //black power pieces
+        [{piece:'r',rank:0,file:0,captured:false,idP:15},
+          {piece:'n',rank:0,file:1,captured:false,idP:14},
+          {piece:'b',rank:0,file:2,captured:false,idP:13},
+          {piece:'q',rank:0,file:3,captured:false,idP:12},
+          {piece:'k',rank:0,file:4,captured:false,idP:11},
+          {piece:'r',rank:0,file:5,captured:false,idP:10},
+          {piece:'r',rank:0,file:6,captured:false,idP:9},
+          {piece:'r',rank:0,file:7,captured:false,idP:8}
+        ],
       
+        [{},{},{},{},{},{},{},{}],
+        [{},{},{},{},{},{},{},{}],
+        [{},{},{},{},{},{},{},{}],
+        [{},{},{},{},{},{},{},{}],
+        [{},{},{},{},{},{},{},{}],
+        [{},{},{},{},{},{},{},{}],
+        [{},{},{},{},{},{},{},{}],
+      ];
       const start = [
          
         'rnbqkbnr',
