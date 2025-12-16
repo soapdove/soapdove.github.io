@@ -1,259 +1,234 @@
-<!doctype html>
+<!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="utf-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <title>Soapdove Maker Site</title>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Marlowe Johnson | Portfolio</title>
   <style>
-    :root {
-      /* Swap this URL to change the background image */
-      --bg-url: url('https://images.unsplash.com/photo-1519681393784-d120267933ba?q=80&w=1880&auto=format&fit=crop');
-      --btn-bg: rgba(255,255,255,0.1);
-      --btn-bg-hover: rgba(255,255,255,0.16);
-      --btn-border: rgba(255,255,255,0.28);
-      --text: #ffffff;
-      --shadow: rgba(0,0,0,0.35);
-    }
-
-    * { box-sizing: border-box; }
-    html, body { height: 100%; }
     body {
       margin: 0;
-      font-family: ui-sans-serif, system-ui, -apple-system, Segoe UI, Roboto, Helvetica, Arial, "Apple Color Emoji", "Segoe UI Emoji";
-      color: var(--text);
-      background: #000; /* safety color under image */
-      overflow: hidden;
+      font-family: Arial, Helvetica, sans-serif;
+      background: #f5f5f5;
+      color: #222;
     }
-
-    .stage {
-      position: relative;
-      width: 100vw;
-      height: 100dvh;
+    header {
+      background: #0b1c2d;
+      color: #ffffff;
+      padding: 1rem 2rem;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      border-bottom: 4px solid #1f4e79;
+    }
+    header h1 {
+      margin: 0;
+      font-size: 1.5rem;
+    }
+    nav a {
+      color: #ffffff;
+      margin-left: 1.5rem;
+      text-decoration: none;
+      font-weight: bold;
+      letter-spacing: 0.03em;
+    }
+    nav a:hover {
+      text-decoration: underline;
+    }
+    .container {
+      max-width: 1100px;
+      margin: auto;
+      padding: 2.5rem 2rem;
+    }
+    section {
+      margin-bottom: 3rem;
+    }
+    h2 {
+      border-bottom: 2px solid #c5d1db;
+      padding-bottom: 0.5rem;
+      margin-bottom: 1.5rem;
+      color: #0b1c2d;
+      letter-spacing: 0.05em;
+    }
+    .resume-section h3 {
+      margin-bottom: 0.25rem;
+    }
+    .resume-section p,
+    .resume-section li {
+      line-height: 1.6;
+    }
+    ul {
+      padding-left: 1.25rem;
+    }
+    .projects {
       display: grid;
-      place-items: center;
-      isolation: isolate;
+      grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+      gap: 1.5rem;
     }
-
-    /* Backdrop */
-    .backdrop {
-      position: absolute;
-      inset: 0;
-      background-image: var(--bg-url);
-      background-size: cover;
-      background-position: center;
-      filter: saturate(1.05);
-      transform: scale(1.02);
-      z-index: -2;
+    .project-card {
+      background: #ffffff;
+      padding: 1.75rem;
+      border-radius: 6px;
+      box-shadow: 0 2px 6px rgba(0,0,0,0.08);
+      border-left: 4px solid #1f4e79;
     }
-    .vignette {
-      position: absolute;
-      inset: 0;
-      background: radial-gradient(120% 80% at 50% 20%, rgba(0,0,0,0.25), rgba(0,0,0,0.65) 60%, rgba(0,0,0,0.8));
-      z-index: -1;
+    .project-card h3 {
+      margin-top: 0;
     }
-
-    .wrap {
-      width: min(960px, 92vw);
-      padding: 24px;
-      backdrop-filter: saturate(1.05);
-    }
-
-    .title {
-      font-weight: 900;
+    footer {
+      background: #111;
+      color: #fff;
       text-align: center;
-      font-size: clamp(28px, 5vw, 44px);
-      letter-spacing: 0.3px;
-      text-shadow: 0 2px 0 var(--shadow);
-      margin: 0 0 28px 0;
-      opacity: 0;
-      transform: translateY(-6px);
-      animation: fade-in 560ms ease-out forwards;
+      padding: 1.5rem;
     }
-
-    .panel { opacity: 0; transform: translateY(8px); animation: fade-in-up 320ms ease-out forwards 80ms; }
-
-    .row {
-      display: grid;
-      grid-template-columns: repeat(2, minmax(200px, 1fr));
-      gap: clamp(14px, 3vw, 22px);
-      place-items: center;
-    }
-
-    .bar {
-      position: absolute;
-      left: 50%;
-      bottom: 16px;
-      transform: translateX(-50%);
-      font-size: 14px;
-      padding: 8px 12px;
-      border: 1px solid rgba(255,255,255,0.14);
-      border-radius: 12px;
-      background: rgba(0,0,0,0.35);
-      backdrop-filter: blur(6px);
-      white-space: nowrap;
-    }
-
-    /* Buttons */
-    .btn {
-      width: clamp(200px, 36vw, 240px);
-      height: 56px;
-      border-radius: 16px;
-      border: 1px solid var(--btn-border);
-      background: var(--btn-bg);
-      color: var(--text);
-      font-weight: 700;
-      font-size: 18px;
-      letter-spacing: 0.25px;
-      box-shadow: 0 8px 18px -8px rgba(0,0,0,0.45);
-      cursor: pointer;
-      transition: transform 160ms ease, background-color 140ms ease, opacity 180ms ease;
-      backdrop-filter: blur(8px);
-      will-change: transform;
-      animation: sway 2.4s ease-in-out infinite;
-      animation-delay: var(--delay, 0s);
-    }
-    .btn:hover { transform: translateY(-2px) scale(1.03); background: var(--btn-bg-hover); }
-    .btn:active { transform: translateY(0) scale(0.985); }
-    .btn:focus-visible { outline: 3px solid rgba(255,255,255,0.7); outline-offset: 3px; }
-
-    .topbar {
-      display: flex; align-items: center; justify-content: space-between;
-      margin: 0 0 16px 0;
-    }
-    .topbar-title { font-size: 20px; font-weight: 700; opacity: 0.95; }
-    .back {
-      border-radius: 12px;
-      padding: 8px 12px;
-      border: 1px solid rgba(255,255,255,0.25);
-      background: rgba(255,255,255,0.08);
-      color: var(--text);
-      font-weight: 600;
-      cursor: pointer;
-      transition: background-color 140ms ease, transform 140ms ease;
-    }
-    .back:hover { background: rgba(255,255,255,0.12); transform: translateY(-1px); }
-    .back:active { transform: translateY(0); }
-
-    .hidden { display: none !important; }
-
-    /* Animations */
-    @keyframes sway { 0% { transform: translateY(0); } 25% { transform: translateY(-3px); } 50% { transform: translateY(0); } 75% { transform: translateY(3px); } 100% { transform: translateY(0); } }
-    @keyframes fade-in { to { opacity: 1; transform: translateY(0); } }
-    @keyframes fade-in-up { to { opacity: 1; transform: translateY(0); } }
-
-    @media (prefers-reduced-motion: reduce) {
-      .btn { animation: none; }
-      .title, .panel { animation: none; opacity: 1; transform: none; }
+    footer a {
+      color: #9fd3ff;
+      text-decoration: none;
     }
   </style>
 </head>
 <body>
-  <main class="stage" aria-live="polite">
-    <div class="backdrop" aria-hidden="true"></div>
-    <div class="vignette" aria-hidden="true"></div>
 
-    <section class="wrap" role="application">
-      <h1 class="title">Maker Site</h1>
+<header>
+  <h1>Marlowe Johnson</h1>
+  <nav>
+    <a href="#about">About</a>
+    <a href="#resume">Resume</a>
+    <a href="#projects">Projects</a>
+    <a href="#current">In Development</a>
+    <a href="Marlowe_Johnson_Resume.pdf" download>Download PDF</a>
+  </nav>
+</header>
 
-      <!-- ROOT MENU -->
-      <div id="rootPanel" class="panel" aria-labelledby="rootHeading">
-        <h2 id="rootHeading" class="sr-only" style="position:absolute;left:-10000px;">Main Options</h2>
-        <div id="rootGrid" class="row" role="menu"></div>
+<div class="container">
+
+  <!-- ABOUT -->
+  <section id="about">
+    <h2>About Me</h2>
+    <p>
+      I am a detail-oriented Computer Science graduate with a strong foundation in statistics,
+      machine learning, and data analysis. I have hands-on experience with databases,
+      automation, and full-stack development, and I am especially passionate about graphics
+      programming and systems-level software. I enjoy working in collaborative environments
+      to solve complex technical problems.
+    </p>
+  </section>
+
+  <!-- RESUME -->
+  <section id="resume" class="resume-section">
+    <h2>Resume</h2>
+
+    <h3>Education</h3>
+    <p><strong>Bachelor of Science in Computer Science</strong> – University of Texas at Austin (02/2019 – 05/2023)</p>
+    <ul>
+      <li>Relevant Coursework: Graphics, Database Management, Robotics, Software Engineering, Artificial Intelligence</li>
+    </ul>
+
+    <p><strong>Post-Graduate Biblical and Ministry Training Program</strong> – Full-Time Training in Anaheim (08/2023 – 06/2025)</p>
+    <ul>
+      <li>Leadership, Communication, Conflict Resolution, Public Speaking, Audio/Video Design</li>
+    </ul>
+
+    <h3>Technical Skills</h3>
+    <ul>
+      <li><strong>Programming:</strong> C, C++, C#, Java</li>
+      <li><strong>Scripting:</strong> Python, PowerShell, JavaScript, PHP</li>
+      <li><strong>Web:</strong> React, HTML, Bootstrap, SASS</li>
+      <li><strong>Databases:</strong> T-SQL, Microsoft Access, PostgreSQL</li>
+      <li><strong>Technologies:</strong> Git/SVN, WPF, OpenCV, Docker, Azure</li>
+      <li><strong>Testing:</strong> Selenium</li>
+    </ul>
+
+    <h3>Professional Experience</h3>
+    <p><strong>Computer Scientist Intern (GS-4)</strong> – Air Force Personnel Center (07/2021 – 07/2023)</p>
+    <ul>
+      <li>Managed secure personnel databases using Microsoft Access in compliance with Air Force privacy policies.</li>
+      <li>Designed complex SQL queries for analytics and reporting.</li>
+      <li>Optimized database structures and improved system accessibility.</li>
+      <li>Developed automated reporting tools using PowerShell.</li>
+      <li>Collaborated with Air Force and IT teams on custom system functionality.</li>
+    </ul>
+  </section>
+
+  <!-- PROJECTS -->
+    <!-- CURRENT DEVELOPMENT -->
+  <section id="current">
+    <h2>Current Development</h2>
+    <div class="projects">
+
+       <div class="project-card">
+        <h3>Barebones Chess</h3>
+        <p>
+          Simple Chess game written using javascript.
+        </p>
       </div>
 
-      <!-- SUBMENU -->
-      <div id="subPanel" class="panel hidden" aria-labelledby="subHeading">
-        <div class="topbar">
-          <div id="subHeading" class="topbar-title">Submenu</div>
-          <button id="backBtn" class="back" type="button" aria-label="Go back to main menu">← Back</button>
-        </div>
-        <div id="subGrid" class="row" role="menu"></div>
+       <div class="project-card">
+        <h3>idkChess</h3>
+        <p>
+          Slighty more complex chess game written in C++ and using the SFML library for GUI, Audio, and Network components.
+        </p>
       </div>
-    </section>
 
-    <div class="bar">Enjoy your stay</div>
-  </main>
+      <div class="project-card">
+        <h3>Skinning Animation</h3>
+        <p>
+          Skinning Animation implemented using WebGL
+        </p>
+      </div>
 
-  <script>
-    // ====== CONFIG ======
-    const BACKGROUND_URL = null;
+      <div class="project-card">
+        <h3>FreeWrite</h3>
+        <p>
+          Anonymous posting using HTML frontend , PHP backend, and SQL database.
+        </p>
+      </div>
 
-    const ROOT_OPTIONS = [
-      { id: 'projects', label: 'Projects' },
-      { id: 'resume', label: 'Resume' },
-      { id: 'settings', label: 'Settings' },
-      { id: 'extras', label: 'Extras' },
-    ];
+    </div>
+  </section>
 
-    const SUBMENUS = {
-      resume: [ {label:'Page', webpage:"fancy_resume.html"}, {label:'Github' ,webpage: "https://github.com/soapdove90-maker/soapdove.github.io"}, {label:'About Me', webpage:''}],
-      projects: [{label:'Chess with Move Eval',webpage:"barebones_chess/chess_index.html"}, {label:'Kanji Learning (Tech Demo)',webpage:""}],
-      settings: [{label:'Graphics',webpage:""},{label: 'Audio',webpage:""}, {label:'Controls',webpage: ""}, {label:'Accessibility',webpage:""}],
-      extras: [{label:'Gallery',webpage:""}],
-    };
+  <!-- PROJECTS -->
+  <section id="projects">
+    <h2>Education Projects</h2>
+    <div class="projects">
 
-    // ====== ELEMENTS ======
-    const backdrop = document.querySelector('.backdrop');
-    const rootPanel = document.getElementById('rootPanel');
-    const rootGrid = document.getElementById('rootGrid');
-    const subPanel = document.getElementById('subPanel');
-    const subGrid = document.getElementById('subGrid');
-    const subHeading = document.getElementById('subHeading');
-    const backBtn = document.getElementById('backBtn');
+      <div class="project-card">
+        <h3>Autonomous Driving System</h3>
+        <p>
+          ROS-based navigation system in C++ featuring A* global path planning,
+          local obstacle avoidance, lattice grids, collision detection, and odometry updates.
+          Enables real-time navigation in 2D environments.
+        </p>
+      </div>
 
-    // Apply optional background URL override
-    if (BACKGROUND_URL) {
-      backdrop.style.backgroundImage = `url('${BACKGROUND_URL}')`;
-    }
+      <div class="project-card">
+        <h3>Ray Tracer</h3>
+        <p>
+          CPU ray tracer written in C++ with recursive ray casting, Phong and PBR shading,
+          reflections, refractions, texture mapping, BVH acceleration, multithreading,
+          and PNG/PPM output.
+        </p>
+      </div>
 
-    // ====== RENDER HELPERS ======
-    function makeButton(label, onClick, delaySec = 0) {
-      const btn = document.createElement('button');
-      btn.type = 'button';
-      btn.className = 'btn';
-      btn.textContent = label;
-      btn.style.setProperty('--delay', `${delaySec}s`);
-      btn.addEventListener('click', onClick);
-      btn.setAttribute('role', 'menuitem');
-      return btn;
-    }
+      <div class="project-card">
+        <h3>City Scoop</h3>
+        <p>
+          Full-stack IMDB-style web application built with Flask, React, and SQL.
+          Features REST APIs, search and filtering, Dockerized deployment,
+          CI/CD testing, and scalable database queries.
+        </p>
+      </div>
 
-    function show(el) { el.classList.remove('hidden'); }
-    function hide(el) { el.classList.add('hidden'); }
+    </div>
+  </section>
 
-    function renderRoot() {
-      rootGrid.innerHTML = '';
-      ROOT_OPTIONS.forEach((opt, i) => {
-        const delay = i * 0.12;
-        const btn = makeButton(opt.label, () => openSubmenu(opt.id), delay);
-        rootGrid.appendChild(btn);
-      });
-      show(rootPanel);
-      hide(subPanel);
-    }
+</div>
 
-    function openSubmenu(id) {
-      subHeading.textContent = (ROOT_OPTIONS.find(o => o.id === id)?.label) || 'Submenu';
-      subGrid.innerHTML = '';
+<footer>
+  <p>
+    Email: <a href="mailto:johnsonmarlowe5@gmail.com">johnsonmarlowe5@gmail.com</a> | 
+    Website: <a href="https://soapdove.github.io/maker">soapdove.github.io/maker</a>
+  </p>
+</footer>
 
-      (SUBMENUS[id] || []).forEach((label, i) => {
-        const delay = i * 0.12;
-        const btn = makeButton(label.label, () => {
-          // Replace this with routing or your own callback logic
-          window.location.href = label.webpage;
-        }, delay);
-        subGrid.appendChild(btn);
-      });
-
-      hide(rootPanel);
-      show(subPanel);
-    }
-
-    // ====== EVENTS ======
-    backBtn.addEventListener('click', () => renderRoot());
-
-    // Initial render
-    renderRoot();
-  </script>
 </body>
 </html>
